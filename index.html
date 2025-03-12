@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zimbabwe Vision 2030 Portal</title>
+    <meta name="description" content="A modern, responsive website for Zimbabwe's Vision 2030 portal to showcase the country's development journey through TSP, NDS1, and NDS2 programs.">
+    <meta name="keywords" content="Vision2030, Zimbabwe, TSP, NDS1, NDS2, Economic Growth, Development">
+    <meta name="author" content="Munyaradzi Chiondegwa">
+    <link rel="favicon" href="favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#5D5CDE',
+                        secondary: '#CE1126',
+                        accent: '#F9CA24',
+                        success: '#008751',
+                        dark: {
+                            bg: '#181818',
+                            card: '#262626',
+                            text: '#E5E5E5'
+                        },
+                        light: {
+                            bg: '#FFFFFF',
+                            card: '#F5F5F5',
+                            text: '#333333'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        .timeline-container {
+            position: relative;
+        }
+        
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #5D5CDE;
+            top: 0;
+            bottom: 0;
+            left: 24px;
+            margin-left: -3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 100%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            left: 24px;
+            background-color: #FFFFFF;
+            border: 4px solid #5D5CDE;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            transform: translateX(-50%);
+        }
+        
+        .dark .timeline-item::after {
+            background-color: #181818;
+        }
+        
+        .hero-slide {
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            width: 100%;
+            background-color: #f3f4f6;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+        
+        .dark .progress-bar {
+            background-color: #374151;
+        }
+    </style>
+</head>
+<body class="antialiased font-sans dark:bg-dark-bg dark:text-dark-text">
+    <!-- Theme Detection -->
+    <script>
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+    </script>
+    
+    <!-- Header Section -->
+    <header class="bg-white dark:bg-dark-card shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="flex flex-col">
+                        <span class="text-xl font-bold text-primary">Zimbabwe Vision 2030</span>
+                        <span class="text-xs text-gray-600 dark:text-gray-400">Towards an Upper Middle-Income Economy</span>
+                    </div>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-800 hover:text-primary dark:text-gray-300 dark:hover:text-primary">Home</a>
+                    <a href="#overview" class="text-gray-800 hover:text-primary dark:text-gray-300 dark:hover:text-primary">Overview</a>
+                    <a href="#programs" class="text-gray-800 hover:text-primary dark:text-gray-300 dark:hover:text-primary">Programs</a>
+                    <a href="#sectors" class="text-gray-800 hover:text-primary dark:text-gray-300 dark:hover:text-primary">Sectors</a>
+                    <a href="#news" class="text-gray-800 hover:text-primary dark:text-gray-300 dark:hover:text-primary">News</a>
+                    <a href="#resources" class="text-gray-800 hover:text-primary dark:text-gray-300 dark:hover:text-primary">Resources</a>
+                </nav>
+                <div class="flex items-center">
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <i class="fas fa-moon hidden dark:block text-gray-300"></i>
+                        <i class="fas fa-sun block dark:hidden text-gray-800"></i>
+                    </button>
+                    <button id="mobile-menu-button" class="md:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <i class="fas fa-bars text-gray-800 dark:text-gray-300"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden mt-3 pb-3">
+                <a href="#home" class="block py-2 text-gray-800 hover:text-primary dark:text-gray-300 dark:hover:text-primary">Home</a>
+                <a href="#overview" class="block py-2 text-gray-800 hover:text-primary dark:text-gray-300 dark:hover:text-primary">Overview</a>
+                <a href="#programs" class="block py-2 text-gray-800 hover:text-primary dark:text-gray-300 dark:hover:text-primary">Programs</a>
+                <a href="#sectors" class="block py-2 text-gray-800 hover:text-primary dark:text-gray-300 dark:hover:text-primary">Sectors</a>
+                <a href="#news" class="block py-2 text-gray-800 hover:text-primary dark:text-gray-300 dark:hover:text-primary">News</a>
+                <a href="#resources" class="block py-2 text-gray-800 hover:text-primary dark:text-gray-300 dark:hover:text-primary">Resources</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section id="home" class="relative w-full">
+        <div class="hero-slideshow h-96 sm:h-[450px] md:h-[500px] lg:h-[550px] overflow-hidden relative">
+            <div class="hero-slide absolute inset-0 w-full h-full opacity-100 bg-gradient-to-r from-primary to-purple-700 flex items-center justify-center">
+                <div class="text-center text-white p-6">
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Zimbabwe Vision 2030</h1>
+                    <p class="text-lg md:text-xl mb-6">Towards an Upper Middle-Income Economy by 2030: Inclusive Growth, Innovation, and Resilience</p>
+                    <a href="#overview" class="bg-white text-primary hover:bg-gray-100 px-6 py-3 rounded-full font-medium shadow-lg">Explore Zimbabwe's Journey to 2030</a>
+                </div>
+            </div>
+            <div class="hero-slide absolute inset-0 w-full h-full opacity-0 bg-gradient-to-r from-secondary to-red-800 flex items-center justify-center">
+                <div class="text-center text-white p-6">
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">TSP 2018-2020</h1>
+                    <p class="text-lg md:text-xl mb-6">Transitional Stabilisation Programme: The Foundation for Economic Recovery</p>
+                    <a href="#programs" class="bg-white text-secondary hover:bg-gray-100 px-6 py-3 rounded-full font-medium shadow-lg">Learn About TSP</a>
+                </div>
+            </div>
+            <div class="hero-slide absolute inset-0 w-full h-full opacity-0 bg-gradient-to-r from-success to-green-700 flex items-center justify-center">
+                <div class="text-center text-white p-6">
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">NDS1 2021-2025</h1>
+                    <p class="text-lg md:text-xl mb-6">National Development Strategy 1: Building Momentum for Growth</p>
+                    <a href="#programs" class="bg-white text-success hover:bg-gray-100 px-6 py-3 rounded-full font-medium shadow-lg">Explore NDS1</a>
+                </div>
+            </div>
+            <div class="hero-slide absolute inset-0 w-full h-full opacity-0 bg-gradient-to-r from-accent to-yellow-600 flex items-center justify-center">
+                <div class="text-center text-white p-6">
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">NDS2 2026-2030</h1>
+                    <p class="text-lg md:text-xl mb-6">National Development Strategy 2: Realizing the Vision</p>
+                    <a href="#programs" class="bg-white text-yellow-600 hover:bg-gray-100 px-6 py-3 rounded-full font-medium shadow-lg">Discover NDS2</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Quick Links Section -->
+    <section class="bg-white dark:bg-dark-card">
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-light-card dark:bg-dark-bg rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-semibold mb-3 flex items-center">
+                        <i class="fas fa-chart-line text-primary mr-2"></i>
+                        KPI Dashboards
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Track Zimbabwe's progress on key performance indicators</p>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">GDP Growth</span>
+                                <span class="text-sm font-medium">4.6%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill bg-primary" style="width: 46%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">Job Creation</span>
+                                <span class="text-sm font-medium">820,000</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill bg-success" style="width: 41%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">Poverty Reduction</span>
+                                <span class="text-sm font-medium">15%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill bg-secondary" style="width: 15%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="mt-4 inline-block text-primary hover:text-primary-dark font-medium">View Full Dashboard <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                
+                <div class="bg-light-card dark:bg-dark-bg rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-semibold mb-3 flex items-center">
+                        <i class="fas fa-newspaper text-primary mr-2"></i>
+                        Latest News
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="pb-3 border-b border-gray-200 dark:border-gray-700">
+                            <h4 class="font-medium mb-1">Mining Sector Growth Exceeds Targets</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">The mining sector has reported a 12% growth, exceeding NDS1 targets...</p>
+                            <span class="text-xs text-gray-500 dark:text-gray-500">June 15, 2023</span>
+                        </div>
+                        <div class="pb-3 border-b border-gray-200 dark:border-gray-700">
+                            <h4 class="font-medium mb-1">New Infrastructure Projects Launched</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Government launches 5 new road rehabilitation projects...</p>
+                            <span class="text-xs text-gray-500 dark:text-gray-500">May 28, 2023</span>
+                        </div>
+                        <div>
+                            <h4 class="font-medium mb-1">Agricultural Productivity Rises</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Zimbabwe reports increased agricultural output following...</p>
+                            <span class="text-xs text-gray-500 dark:text-gray-500">May 10, 2023</span>
+                        </div>
+                    </div>
+                    <a href="#news" class="mt-4 inline-block text-primary hover:text-primary-dark font-medium">View All News <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                
+                <div class="bg-light-card dark:bg-dark-bg rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-semibold mb-3 flex items-center">
+                        <i class="fas fa-clock-rotate-left text-primary mr-2"></i>
+                        Development Timeline
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <div class="w-24 flex-shrink-0">
+                                <span class="px-2 py-1 bg-secondary text-white text-xs rounded">2018-2020</span>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-medium">TSP</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Transitional Stabilisation Programme</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-24 flex-shrink-0">
+                                <span class="px-2 py-1 bg-success text-white text-xs rounded">2021-2025</span>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-medium">NDS1</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">National Development Strategy 1</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-24 flex-shrink-0">
+                                <span class="px-2 py-1 bg-accent text-white text-xs rounded">2026-2030</span>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-medium">NDS2</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">National Development Strategy 2</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#programs" class="mt-4 inline-block text-primary hover:text-primary-dark font-medium">Explore Timeline <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Vision 2030 Overview Section -->
+    <section id="overview" class="py-12 bg-gray-50 dark:bg-dark-bg">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Vision 2030 Overview</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">Zimbabwe's roadmap to becoming an upper middle-income economy by 2030, focused on inclusive growth, innovation, and resilience.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-dark-card rounded-lg shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white">
+                            <i class="fas fa-bullseye text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold ml-4">Vision & Mission</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">To transform Zimbabwe into a prosperous, empowered, upper-middle-income society by 2030.</p>
+                    <div class="space-y-3">
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-success mt-1"></i>
+                            <p class="ml-3 text-gray-600 dark:text-gray-400">Inclusive economic growth</p>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-success mt-1"></i>
+                            <p class="ml-3 text-gray-600 dark:text-gray-400">Modern infrastructure development</p>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-success mt-1"></i>
+                            <p class="ml-3 text-gray-600 dark:text-gray-400">Good governance and rule of law</p>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-success mt-1"></i>
+                            <p class="ml-3 text-gray-600 dark:text-gray-400">Environmental sustainability</p>
+                        </div>
+                    </div>
+                    <button class="mt-6 text-primary hover:text-primary-dark font-medium">Read Full Vision Statement <i class="fas fa-arrow-right ml-1"></i></button>
+                </div>
+                
+                <div class="bg-white dark:bg-dark-card rounded-lg shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white">
+                            <i class="fas fa-map-marked-alt text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold ml-4">Progress Tracker</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Track Zimbabwe's progress on key development projects across the country.</p>
+                    <div class="h-48 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-gray-500 dark:text-gray-400">Interactive Map Coming Soon</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg">
+                            <h4 class="font-medium mb-1">Projects</h4>
+                            <p class="text-2xl font-bold text-primary">245</p>
+                        </div>
+                        <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg">
+                            <h4 class="font-medium mb-1">Provinces</h4>
+                            <p class="text-2xl font-bold text-primary">10</p>
+                        </div>
+                        <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg">
+                            <h4 class="font-medium mb-1">Completed</h4>
+                            <p class="text-2xl font-bold text-success">127</p>
+                        </div>
+                        <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg">
+                            <h4 class="font-medium mb-1">In Progress</h4>
+                            <p class="text-2xl font-bold text-accent">118</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-dark-card rounded-lg shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white">
+                            <i class="fas fa-road text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold ml-4">Development Path</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Zimbabwe's journey to Vision 2030 through strategic development programs.</p>
+                    <div class="timeline-container pb-2">
+                        <div class="timeline-item">
+                            <h4 class="font-semibold">TSP (2018-2020)</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Focused on stabilizing the economy, restoring confidence, and laying the foundation for growth.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="font-semibold">NDS1 (2021-2025)</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Building momentum through structural reforms and infrastructure development.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="font-semibold">NDS2 (2026-2030)</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Accelerating growth and achieving Vision 2030 goals.</p>
+                        </div>
+                    </div>
+                    <button id="showDetailsBtn" class="mt-6 text-primary hover:text-primary-dark font-medium">Explore Development Programs <i class="fas fa-arrow-right ml-1"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Programs Section -->
+    <section id="programs" class="py-12 bg-white dark:bg-dark-card">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Development Programs</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">Zimbabwe's strategic programs for economic recovery and sustainable development.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- TSP Card -->
+                <div class="bg-light-card dark:bg-dark-bg rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-secondary h-3"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold">TSP</h3>
+                            <span class="bg-secondary text-white text-xs py-1 px-2 rounded">2018-2020</span>
+                        </div>
+                        <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-3">Transitional Stabilisation Programme</h4>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">A short-term economic recovery plan to stabilize the economy, restore confidence, and lay the foundation for sustainable growth.</p>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-start">
+                                <i class="fas fa-trophy text-secondary mt-1"></i>
+                                <div class="ml-3">
+                                    <h5 class="font-medium">Key Achievements</h5>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Reduced inflation and fiscal deficit, introduced currency reforms</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-bullseye text-secondary mt-1"></i>
+                                <div class="ml-3">
+                                    <h5 class="font-medium">Focus Areas</h5>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Fiscal consolidation, monetary reforms, structural changes</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full py-2 bg-secondary text-white rounded-lg hover:bg-red-700 transition-colors" onclick="showProgramDetails('tsp')">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- NDS1 Card -->
+                <div class="bg-light-card dark:bg-dark-bg rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-success h-3"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold">NDS1</h3>
+                            <span class="bg-success text-white text-xs py-1 px-2 rounded">2021-2025</span>
+                        </div>
+                        <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-3">National Development Strategy 1</h4>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">A medium-term plan focused on accelerating economic growth and creating a foundation for sustainable development.</p>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-start">
+                                <i class="fas fa-trophy text-success mt-1"></i>
+                                <div class="ml-3">
+                                    <h5 class="font-medium">Key Achievements</h5>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">GDP growth, infrastructure development, improved social services</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-bullseye text-success mt-1"></i>
+                                <div class="ml-3">
+                                    <h5 class="font-medium">Focus Areas</h5>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">13 thematic clusters including economic growth, agriculture, and infrastructure</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full py-2 bg-success text-white rounded-lg hover:bg-green-700 transition-colors" onclick="showProgramDetails('nds1')">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- NDS2 Card -->
+                <div class="bg-light-card dark:bg-dark-bg rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-accent h-3"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold">NDS2</h3>
+                            <span class="bg-accent text-white text-xs py-1 px-2 rounded">2026-2030</span>
+                        </div>
+                        <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-3">National Development Strategy 2</h4>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">The final phase of Zimbabwe's journey to Vision 2030, focused on achieving upper middle-income status.</p>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-start">
+                                <i class="fas fa-trophy text-accent mt-1"></i>
+                                <div class="ml-3">
+                                    <h5 class="font-medium">Expected Outcomes</h5>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">7% GDP growth, 2 million jobs, halved poverty rate</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-bullseye text-accent mt-1"></i>
+                                <div class="ml-3">
+                                    <h5 class="font-medium">Focus Areas</h5>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">15 thematic clusters expanding on NDS1, with emphasis on innovation</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full py-2 bg-accent text-white rounded-lg hover:bg-yellow-600 transition-colors" onclick="showProgramDetails('nds2')">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Economic Sectors Section -->
+    <section id="sectors" class="py-12 bg-gray-50 dark:bg-dark-bg">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Economic Sectors</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">Key sectors driving Zimbabwe's economic growth and development under Vision 2030.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Agriculture Sector -->
+                <div class="bg-white dark:bg-dark-card rounded-lg shadow-md overflow-hidden">
+                    <div class="relative">
+                        <div class="h-48 bg-gradient-to-r from-green-600 to-green-800 flex items-center justify-center">
+                            <i class="fas fa-tractor text-white text-5xl"></i>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 p-4">
+                            <h3 class="text-xl font-bold text-white">Agriculture</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Zimbabwe's agricultural sector is a cornerstone of the economy, providing livelihoods for the majority of the population.</p>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-start">
+                                <i class="fas fa-leaf text-green-600 mt-1"></i>
+                                <div class="ml-3">
+                                    <h5 class="font-medium">Food Security Initiatives</h5>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Supporting smallholder farmers and promoting climate-smart agriculture</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-water text-green-600 mt-1"></i>
+                                <div class="ml-3">
+                                    <h5 class="font-medium">Irrigation Projects</h5>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Expanding irrigation infrastructure to reduce dependence on rainfall</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-chart-line text-green-600 mt-1"></i>
+                                <div class="ml-3">
+                                    <h5 class="font-medium">Success Stories</h5>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Showcasing achievements in agricultural productivity and exports</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">Learn More</button>
+                    </div>
+                </div>
+                
+                <!-- Mining Sector -->
+                <div class="bg-white dark:bg-dark-card rounded-lg shadow-md overflow-hidden">
+                    <div class="relative">
+                        <div class="h-48 bg-gradient-to-r from-gray-600 to-gray-800 flex items-center justify-center">
+                            <i class="fas fa-hard-hat text-white text-5xl"></i>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 p-4">
+                            <h3 class="text-xl font-bold text-white">Mining</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Zimbabwe is endowed with rich mineral resources, making mining a significant contributor to the economy and exports.</p>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-start">
+                                <i class="fas fa-gem text-gray-600 mt-1"></i>
+                                <div class="ml-3">
+                                    <h5 class="font-medium">Value Addition</h5>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Promoting downstream processing of minerals for increased value</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-tree text-gray-600 mt-1"></i>
+                                <div class="ml-3">
+                                    <h5 class="font-medium">Environmental Regulations</h5>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Ensuring responsible mining practices and rehabilitation</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-coins text-gray-600 mt-1"></i>
+                                <div class="ml-3">
+                                    <h5 class="font-medium">Investment Opportunities</h5>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Attracting foreign and domestic investment in the mining sector</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">Learn More</button>
+                    </div>
+                </div>
+                
+                <!-- Tourism Sector -->
+                <div class="bg-white dark:bg-dark-card rounded-lg shadow-md overflow-hidden">
+                    <div class="relative">
+                        <div class="h-48 bg-gradient-to-r from-blue-600 to-blue-800 flex items-center justify-center">
+                            <i class="fas fa-landmark text-white text-5xl"></i>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 p-4">
+                            <h3 class="text-xl font-bold text-white">Tourism</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Tourism is a vital sector for Zimbabwe, showcasing the country's natural beauty, cultural heritage, and hospitality.</p>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-start">
+                                <i class="fas fa-mountain text-blue-600 mt-1"></i>
+                                <div class="ml-3">
+                                    <h5 class="font-medium">Destination Highlights</h5>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Promoting Victoria Falls, national parks, and cultural sites</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-plane text-blue-600 mt-1"></i>
+                                <div class="ml-3">
+                                    <h5 class="font-medium">Infrastructure Projects</h5>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Developing airports, roads, and accommodation facilities</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-calendar-alt text-blue-600 mt-1"></i>
+                                <div class="ml-3">
+                                    <h5 class="font-medium">Events & Expos</h5>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Hosting international events to showcase Zimbabwe's tourism offerings</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- News & Updates Section -->
+    <section id="news" class="py-12 bg-white dark:bg-dark-card">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">News & Updates</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">Stay informed about Zimbabwe's progress towards Vision 2030.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- News Item 1 -->
+                <div class="bg-light-card dark:bg-dark-bg rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Policy</span>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 ml-3">July 3, 2023</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">New Investment Laws to Boost Foreign Direct Investment</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">The government has introduced new investment laws to attract foreign direct investment and improve the ease of doing business in Zimbabwe...</p>
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-primary hover:text-primary-dark font-medium">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                            <div class="flex space-x-2">
+                                <button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"><i class="fab fa-twitter text-blue-400"></i></button>
+                                <button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"><i class="fab fa-facebook text-blue-600"></i></button>
+                                <button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"><i class="fab fa-linkedin text-blue-700"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- News Item 2 -->
+                <div class="bg-light-card dark:bg-dark-bg rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-success text-white text-xs px-2 py-1 rounded">Development</span>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 ml-3">June 28, 2023</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Major Dam Project to Boost Agricultural Productivity</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">The completion of a major dam project is set to boost agricultural productivity and ensure water security for thousands of households...</p>
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-primary hover:text-primary-dark font-medium">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                            <div class="flex space-x-2">
+                                <button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"><i class="fab fa-twitter text-blue-400"></i></button>
+                                <button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"><i class="fab fa-facebook text-blue-600"></i></button>
+                                <button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"><i class="fab fa-linkedin text-blue-700"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- News Item 3 -->
+                <div class="bg-light-card dark:bg-dark-bg rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-secondary text-white text-xs px-2 py-1 rounded">Success Story</span>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 ml-3">June 15, 2023</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Local Tech Startup Secures International Funding</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">A Zimbabwean tech startup has secured $2 million in international funding, showcasing the country's growing innovation ecosystem...</p>
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-primary hover:text-primary-dark font-medium">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                            <div class="flex space-x-2">
+                                <button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"><i class="fab fa-twitter text-blue-400"></i></button>
+                                <button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"><i class="fab fa-facebook text-blue-600"></i></button>
+                                <button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"><i class="fab fa-linkedin text-blue-700"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- News Item 4 -->
+                <div class="bg-light-card dark:bg-dark-bg rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-accent text-white text-xs px-2 py-1 rounded">Infrastructure</span>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 ml-3">June 10, 2023</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">New Power Plant to Address Energy Challenges</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">A new power plant with a capacity of 200MW is set to address Zimbabwe's energy challenges and support industrial growth...</p>
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-primary hover:text-primary-dark font-medium">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                            <div class="flex space-x-2">
+                                <button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"><i class="fab fa-twitter text-blue-400"></i></button>
+                                <button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"><i class="fab fa-facebook text-blue-600"></i></button>
+                                <button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"><i class="fab fa-linkedin text-blue-700"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- News Item 5 -->
+                <div class="bg-light-card dark:bg-dark-bg rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Health</span>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 ml-3">June 5, 2023</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">New Medical Centers Improve Healthcare Access</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Five new medical centers have been opened across rural Zimbabwe, significantly improving access to healthcare services...</p>
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-primary hover:text-primary-dark font-medium">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                            <div class="flex space-x-2">
+                                <button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"><i class="fab fa-twitter text-blue-400"></i></button>
+                                <button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"><i class="fab fa-facebook text-blue-600"></i></button>
+                                <button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"><i class="fab fa-linkedin text-blue-700"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- News Item 6 -->
+                <div class="bg-light-card dark:bg-dark-bg rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-success text-white text-xs px-2 py-1 rounded">Education</span>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 ml-3">May 28, 2023</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">STEM Initiative Launched in 100 Schools</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">A new STEM initiative has been launched in 100 schools across Zimbabwe, equipping students with skills for the 21st century...</p>
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-primary hover:text-primary-dark font-medium">Read More <i class="fas fa-arrow-right ml-1"></i></a>
+                            <div class="flex space-x-2">
+                                <button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"><i class="fab fa-twitter text-blue-400"></i></button>
+                                <button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"><i class="fab fa-facebook text-blue-600"></i></button>
+                                <button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"><i class="fab fa-linkedin text-blue-700"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <button class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors">Load More News</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Resources Section -->
+    <section id="resources" class="py-12 bg-gray-50 dark:bg-dark-bg">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Resources & Downloads</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">Access key documents and resources related to Zimbabwe's Vision 2030.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- TSP Document -->
+                <div class="bg-white dark:bg-dark-card rounded-lg shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-white">
+                            <i class="fas fa-file-pdf text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-semibold">TSP Final Report</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">2018-2020</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">Comprehensive report on the Transitional Stabilisation Programme (TSP), including achievements, challenges, and lessons learned.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500 dark:text-gray-400">PDF • 4.2 MB</span>
+                        <button class="text-secondary hover:text-red-700 font-medium">Download <i class="fas fa-download ml-1"></i></button>
+                    </div>
+                </div>
+                
+                <!-- NDS1 Document -->
+                <div class="bg-white dark:bg-dark-card rounded-lg shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-success flex items-center justify-center text-white">
+                            <i class="fas fa-file-pdf text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-semibold">NDS1 Mid-Term Review</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">2021-2025</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">Mid-term evaluation of the National Development Strategy 1 (NDS1), outlining progress, challenges, and adjustments for the remaining period.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500 dark:text-gray-400">PDF • 5.8 MB</span>
+                        <button class="text-success hover:text-green-700 font-medium">Download <i class="fas fa-download ml-1"></i></button>
+                    </div>
+                </div>
+                
+                <!-- NDS2 Document -->
+                <div class="bg-white dark:bg-dark-card rounded-lg shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-white">
+                            <i class="fas fa-file-pdf text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-semibold">NDS2 Blueprint</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">2026-2030</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">Framework for the National Development Strategy 2 (NDS2), outlining key objectives, focus areas, and implementation strategies.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500 dark:text-gray-400">PDF • 6.1 MB</span>
+                        <button class="text-accent hover:text-yellow-600 font-medium">Download <i class="fas fa-download ml-1"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Vision 2030 Document -->
+                <div class="bg-white dark:bg-dark-card rounded-lg shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white">
+                            <i class="fas fa-file-pdf text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-semibold">Vision 2030 Strategy</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">2018-2030</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">Comprehensive document outlining Zimbabwe's Vision 2030, including strategic pillars, objectives, and implementation framework.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500 dark:text-gray-400">PDF • 7.5 MB</span>
+                        <button class="text-primary hover:text-primary-dark font-medium">Download <i class="fas fa-download ml-1"></i></button>
+                    </div>
+                </div>
+                
+                <!-- NDS1 Communication Strategy -->
+                <div class="bg-white dark:bg-dark-card rounded-lg shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white">
+                            <i class="fas fa-file-pdf text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-semibold">NDS1 Communication Strategy</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">2021-2025</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">Strategy for communicating NDS1 to citizens, stakeholders, and the diaspora, including social media campaigns and engagement activities.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500 dark:text-gray-400">PDF • 3.9 MB</span>
+                        <button class="text-primary hover:text-primary-dark font-medium">Download <i class="fas fa-download ml-1"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Citizen's Guide -->
+                <div class="bg-white dark:bg-dark-card rounded-lg shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-success flex items-center justify-center text-white">
+                            <i class="fas fa-file-pdf text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-semibold">Vision 2030 Citizen's Guide</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Simplified Version</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">Simplified guide to Vision 2030, TSP, and NDS1 for citizens, including key objectives, achievements, and participation opportunities.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500 dark:text-gray-400">PDF • 2.3 MB</span>
+                        <button class="text-success hover:text-green-700 font-medium">Download <i class="fas fa-download ml-1"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Feedback Form Section -->
+    <section class="py-12 bg-white dark:bg-dark-card">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto bg-light-card dark:bg-dark-bg rounded-lg shadow-md p-8">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold mb-4">We Value Your Feedback</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-400">Share your thoughts on Vision 2030, TSP, NDS1, and NDS2, or suggest improvements to this website.</p>
+                </div>
+                
+                <form id="feedbackForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your Name</label>
+                            <input type="text" id="name" name="name" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg text-base focus:ring-2 focus:ring-primary dark:bg-gray-800 dark:text-white" placeholder="Enter your name">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
+                            <input type="email" id="email" name="email" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg text-base focus:ring-2 focus:ring-primary dark:bg-gray-800 dark:text-white" placeholder="Enter your email">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Subject</label>
+                        <input type="text" id="subject" name="subject" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg text-base focus:ring-2 focus:ring-primary dark:bg-gray-800 dark:text-white" placeholder="Enter subject">
+                    </div>
+                    
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your Message</label>
+                        <textarea id="message" name="message" rows="5" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg text-base focus:ring-2 focus:ring-primary dark:bg-gray-800 dark:text-white" placeholder="Enter your message"></textarea>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input type="checkbox" id="subscribe" name="subscribe" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded">
+                        <label for="subscribe" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">Subscribe to updates about Vision 2030 and related programs</label>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button type="submit" class="px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary-dark transition-colors">Submit Feedback</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Zimbabwe Vision 2030</h3>
+                    <p class="text-gray-400 mb-6">Towards an Upper Middle-Income Economy by 2030: Inclusive Growth, Innovation, and Resilience</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="#overview" class="text-gray-400 hover:text-white">Vision 2030 Overview</a></li>
+                        <li><a href="#programs" class="text-gray-400 hover:text-white">Development Programs</a></li>
+                        <li><a href="#sectors" class="text-gray-400 hover:text-white">Economic Sectors</a></li>
+                        <li><a href="#news" class="text-gray-400 hover:text-white">News & Updates</a></li>
+                        <li><a href="#resources" class="text-gray-400 hover:text-white">Resources</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Key Programs</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">TSP (2018-2020)</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">NDS1 (2021-2025)</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">NDS2 (2026-2030)</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Ministry Portals</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Government Projects</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Information</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-gray-400"></i>
+                            <span class="text-gray-400">Office of the President and Cabinet, Munhumutapa Building, Harare, Zimbabwe</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-gray-400"></i>
+                            <span class="text-gray-400">+263 242 700 000</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-gray-400"></i>
+                            <span class="text-gray-400">info@vision2030.co.zw</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-gray-700 text-center text-gray-400">
+                <p>&copy; 2025 | Munyaradzi Chiondegwa | Zimbabwe Vision 2030. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Program Details Modal -->
+    <div id="programDetailsModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white dark:bg-dark-card max-w-4xl mx-4 rounded-lg shadow-xl overflow-auto max-h-[90vh]">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 id="modalTitle" class="text-2xl font-bold"></h3>
+                    <button id="closeModal" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div id="modalContent">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Theme toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+        
+        // Hero slideshow
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+        
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.opacity = i === index ? '1' : '0';
+            });
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+        
+        // Start slideshow
+        showSlide(0);
+        setInterval(nextSlide, 5000);
+        
+        // Program Details Modal
+        const modal = document.getElementById('programDetailsModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalContent = document.getElementById('modalContent');
+        const closeModal = document.getElementById('closeModal');
+        
+        closeModal.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+            }
+        });
+        
+        function showProgramDetails(program) {
+            let title, content;
+            
+            if (program === 'tsp') {
+                title = 'Transitional Stabilisation Programme (2018-2020)';
+                content = `
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">Introduction</h4>
+                            <p class="text-gray-600 dark:text-gray-400">The Transitional Stabilisation Programme (TSP) was Zimbabwe's short-term economic recovery plan, implemented from October 2018 to December 2020. The TSP aimed to stabilize the economy, restore confidence, and lay the foundation for sustainable growth.</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">Strategic Objectives</h4>
+                            <ul class="list-disc pl-6 space-y-2 text-gray-600 dark:text-gray-400">
+                                <li>Macroeconomic Stability: Restore fiscal and monetary stability to curb hyperinflation and stabilize the currency.</li>
+                                <li>Fiscal Consolidation: Reduce fiscal deficits and improve public financial management.</li>
+                                <li>Structural Reforms: Implement reforms to improve the business environment and attract investment.</li>
+                                <li>Social Protection: Protect vulnerable groups through targeted social safety nets.</li>
+                                <li>Productivity and Growth: Stimulate productivity in key sectors such as agriculture, mining, and manufacturing.</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">Key Focus Areas</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Fiscal Consolidation</h5>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Reducing government expenditure and eliminating non-essential spending.</p>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Monetary Reforms</h5>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Introducing a new currency and restoring confidence in the banking sector.</p>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Structural Reforms</h5>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Simplifying business registration and reducing bureaucratic red tape.</p>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Social Protection</h5>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Expanding safety nets to protect vulnerable groups during economic reforms.</p>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Infrastructure Development</h5>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Rehabilitating critical infrastructure such as roads, energy, and water systems.</p>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Productivity Growth</h5>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Supporting agriculture through input subsidies and irrigation development.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">Key Achievements</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-success mt-1"></i>
+                                    <p class="ml-3 text-gray-600 dark:text-gray-400">Reduced inflation from over 800% in 2020 to below 50% by 2021.</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-success mt-1"></i>
+                                    <p class="ml-3 text-gray-600 dark:text-gray-400">Reduced fiscal deficit from 11.7% of GDP in 2017 to 1.5% by 2020.</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-success mt-1"></i>
+                                    <p class="ml-3 text-gray-600 dark:text-gray-400">Introduced the Zimbabwe Dollar to address currency instability.</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-success mt-1"></i>
+                                    <p class="ml-3 text-gray-600 dark:text-gray-400">Expanded social safety nets, benefiting over 1 million vulnerable households.</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-success mt-1"></i>
+                                    <p class="ml-3 text-gray-600 dark:text-gray-400">Rehabilitated key infrastructure, including roads and energy systems.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">Challenges & Lessons</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="font-semibold mb-2">Challenges</h5>
+                                    <ul class="list-disc pl-6 space-y-1 text-gray-600 dark:text-gray-400 text-sm">
+                                        <li>Implementation delays due to bureaucratic inefficiencies.</li>
+                                        <li>Public resistance to austerity measures.</li>
+                                        <li>COVID-19 pandemic disruptions.</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold mb-2">Lessons Learned</h5>
+                                    <ul class="list-disc pl-6 space-y-1 text-gray-600 dark:text-gray-400 text-sm">
+                                        <li>Importance of stakeholder engagement and communication.</li>
+                                        <li>Need for flexibility to adapt to external shocks.</li>
+                                        <li>Critical role of monitoring and evaluation.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">Transition to NDS1</h4>
+                            <p class="text-gray-600 dark:text-gray-400">The TSP successfully laid the foundation for the National Development Strategy 1 (NDS1), providing economic stability and a clear path forward. NDS1 builds on the achievements of TSP, focusing on accelerating economic growth and sustainable development.</p>
+                        </div>
+                    </div>
+                `;
+            } else if (program === 'nds1') {
+                title = 'National Development Strategy 1 (2021-2025)';
+                content = `
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">Introduction</h4>
+                            <p class="text-gray-600 dark:text-gray-400">The National Development Strategy 1 (NDS1) is Zimbabwe's medium-term development plan for the period 2021-2025. Building on the Transitional Stabilisation Programme (TSP), NDS1 aims to achieve accelerated, high, inclusive, and sustainable economic growth as well as socio-economic transformation.</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">Strategic Objectives</h4>
+                            <ul class="list-disc pl-6 space-y-2 text-gray-600 dark:text-gray-400">
+                                <li>Economic Growth: Achieve an average annual GDP growth of 5%.</li>
+                                <li>Food Security: Increase agricultural productivity and ensure national food security.</li>
+                                <li>Infrastructure Development: Modernize and expand infrastructure to support economic growth.</li>
+                                <li>Human Capital Development: Improve access to quality education, healthcare, and social services.</li>
+                                <li>Governance: Strengthen governance systems and institutions for effective service delivery.</li>
+                                <li>Environmental Protection: Promote environmental conservation and climate resilience.</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">13 Thematic Clusters</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Economic Growth & Stability</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Social Development</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Infrastructure & Utilities</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Governance & Public Sector Reform</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Environmental Protection & Climate Resilience</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Agriculture & Food Security</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Mining & Mineral Development</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Tourism & Hospitality</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Manufacturing & Industrialization</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Education & Skills Development</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Health & Well-being</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">ICT & Digital Economy</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Youth, Sports & Culture</h5>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">Key Achievements (Mid-Term)</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-success mt-1"></i>
+                                    <p class="ml-3 text-gray-600 dark:text-gray-400">Positive GDP growth rates despite COVID-19 challenges.</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-success mt-1"></i>
+                                    <p class="ml-3 text-gray-600 dark:text-gray-400">Increased agricultural productivity, reducing dependence on food imports.</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-success mt-1"></i>
+                                    <p class="ml-3 text-gray-600 dark:text-gray-400">Significant infrastructure development projects, including road rehabilitation.</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-success mt-1"></i>
+                                    <p class="ml-3 text-gray-600 dark:text-gray-400">Expanded access to healthcare, education, and social services.</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-success mt-1"></i>
+                                    <p class="ml-3 text-gray-600 dark:text-gray-400">Improvements in the business environment, attracting both domestic and foreign investment.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">Communication Strategy</h4>
+                            <p class="text-gray-600 dark:text-gray-400">The NDS1 Communication Strategy aims to create a sustained national information campaign to raise awareness about NDS1 and foster public participation in government programs. The strategy leverages social media and other platforms to engage citizens, stakeholders, and the diaspora.</p>
+                            
+                            <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Key Objectives</h5>
+                                    <ul class="list-disc pl-6 space-y-1 text-gray-600 dark:text-gray-400 text-sm">
+                                        <li>Disseminate information about NDS1</li>
+                                        <li>Simplify NDS1 for public understanding</li>
+                                        <li>Highlight government strategies</li>
+                                        <li>Engage the public in dialogue</li>
+                                        <li>Promote public participation</li>
+                                        <li>Highlight economic opportunities</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Approaches</h5>
+                                    <ul class="list-disc pl-6 space-y-1 text-gray-600 dark:text-gray-400 text-sm">
+                                        <li>Social media campaigns</li>
+                                        <li>Live engagements and discussions</li>
+                                        <li>Branded materials and presentations</li>
+                                        <li>Partnerships with broadcasters and influencers</li>
+                                        <li>Roadshows and town-hall meetings</li>
+                                        <li>Platform-specific content development</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">Looking Ahead to NDS2</h4>
+                            <p class="text-gray-600 dark:text-gray-400">NDS1 forms a critical bridge between the TSP and NDS2, laying the groundwork for Zimbabwe's continued progress toward Vision 2030. The successes, challenges, and lessons learned from NDS1 will inform the design and implementation of NDS2 (2026-2030), which will focus on consolidating gains and achieving the ultimate goal of upper middle-income status.</p>
+                        </div>
+                    </div>
+                `;
+            } else if (program === 'nds2') {
+                title = 'National Development Strategy 2 (2026-2030)';
+                content = `
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">Introduction</h4>
+                            <p class="text-gray-600 dark:text-gray-400">The National Development Strategy 2 (NDS2) represents the final phase of Zimbabwe's journey toward Vision 2030. Building on the successes and lessons of TSP and NDS1, NDS2 (2026-2030) will focus on consolidating gains and accelerating progress to achieve upper middle-income status.</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">Vision and Mission</h4>
+                            <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-4">
+                                <h5 class="font-semibold mb-2">Vision</h5>
+                                <p class="text-gray-600 dark:text-gray-400">To create a prosperous, inclusive, and sustainable Zimbabwe by 2030, where every citizen enjoys a high quality of life and equal access to opportunities.</p>
+                            </div>
+                            <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                <h5 class="font-semibold mb-2">Mission</h5>
+                                <p class="text-gray-600 dark:text-gray-400">To accelerate economic transformation, promote social equity, and ensure environmental sustainability through targeted policies, programs, and partnerships.</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">Strategic Objectives</h4>
+                            <ul class="list-disc pl-6 space-y-2 text-gray-600 dark:text-gray-400">
+                                <li>Economic Transformation: Achieve sustained, inclusive economic growth through industrialization, innovation, and private sector development.</li>
+                                <li>Social Development: Improve access to quality education, healthcare, and social services for all citizens.</li>
+                                <li>Infrastructure Modernization: Develop world-class infrastructure, including roads, energy, water, and ICT, to support economic growth and improve livelihoods.</li>
+                                <li>Environmental Sustainability: Promote climate resilience, renewable energy, and sustainable natural resource management.</li>
+                                <li>Governance and Accountability: Strengthen public institutions, enhance transparency, and combat corruption to build trust and efficiency.</li>
+                                <li>Diaspora Engagement: Leverage the skills, expertise, and resources of the diaspora to drive national development.</li>
+                                <li>Global Integration: Enhance Zimbabwe's global competitiveness through trade, investment, and international partnerships.</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">15 Thematic Clusters</h4>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4">NDS2 expands on the 13 clusters of NDS1 to address emerging challenges and opportunities:</p>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Economic Growth & Stability</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Agriculture & Food Security</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Mining & Mineral Development</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Tourism & Hospitality</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Manufacturing & Industrialization</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Infrastructure & Utilities</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Information & Communication Technology</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Education & Skills Development</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Health & Well-being</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Social Protection & Inclusion</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Environmental Protection & Climate Resilience</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Governance & Public Sector Reform</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Youth, Sports & Culture</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Diaspora Engagement</h5>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Global Integration & Partnerships</h5>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">Expected Outcomes</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <i class="fas fa-chart-line text-accent mt-1"></i>
+                                    <p class="ml-3 text-gray-600 dark:text-gray-400">Sustained GDP growth of 7% annually.</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-briefcase text-accent mt-1"></i>
+                                    <p class="ml-3 text-gray-600 dark:text-gray-400">Creation of over 2 million new jobs in key sectors.</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-hands-helping text-accent mt-1"></i>
+                                    <p class="ml-3 text-gray-600 dark:text-gray-400">Halve the national poverty rate.</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-plug text-accent mt-1"></i>
+                                    <p class="ml-3 text-gray-600 dark:text-gray-400">Universal access to electricity, clean water, and modern transportation.</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-leaf text-accent mt-1"></i>
+                                    <p class="ml-3 text-gray-600 dark:text-gray-400">Significant reduction in carbon emissions and increased use of renewable energy.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">Implementation Framework</h4>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4">NDS2 will be implemented through a multi-stakeholder approach, involving government, private sector, civil society, and international partners:</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Implementation Components</h5>
+                                    <ul class="list-disc pl-6 space-y-1 text-gray-600 dark:text-gray-400 text-sm">
+                                        <li>Policy Alignment</li>
+                                        <li>Resource Mobilization</li>
+                                        <li>Monitoring and Evaluation</li>
+                                        <li>Citizen Engagement</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+                                    <h5 class="font-semibold mb-2">Implementation Timeline</h5>
+                                    <ul class="list-disc pl-6 space-y-1 text-gray-600 dark:text-gray-400 text-sm">
+                                        <li>2026: Launch NDS2 and establish structures</li>
+                                        <li>2027: Roll out key initiatives in priority sectors</li>
+                                        <li>2028: Scale up successful programs</li>
+                                        <li>2029: Conduct mid-term review</li>
+                                        <li>2030: Achieve Vision 2030 goals</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">Realizing Vision 2030</h4>
+                            <p class="text-gray-600 dark:text-gray-400">NDS2 represents the culmination of Zimbabwe's strategic development plans aimed at achieving Vision 2030. By building on the foundations laid by TSP and NDS1, NDS2 will propel Zimbabwe to upper middle-income status, creating a prosperous, inclusive, and sustainable society for all citizens.</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            modalTitle.textContent = title;
+            modalContent.innerHTML = content;
+            modal.classList.remove('hidden');
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Show program details when "Explore Development Programs" is clicked
+        document.getElementById('showDetailsBtn').addEventListener('click', function() {
+            document.querySelector('#programs').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+        
+        // Form submission handling
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            const subscribe = document.getElementById('subscribe').checked;
+            
+            // Simple validation
+            if (!name || !email || !message) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Simulate form submission
+            this.reset();
+            
+            // Show success message (in a real app, this would come after API call)
+            alert('Thank you for your feedback! Your message has been received.');
+        });
+    </script>
+</body>
+</html>
